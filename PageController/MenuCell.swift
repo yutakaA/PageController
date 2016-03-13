@@ -11,6 +11,11 @@ import UIKit
 public class MenuCell: UIView {
 
     public let titleLabel = UILabel(frame: CGRectZero)
+    public var titleLabelFont = UIFont.systemFontOfSize(17)
+    public var selectedTitleLabelFont = UIFont.boldSystemFontOfSize(17)
+    public var titleLabelColor = UIColor.grayColor()
+    public var selectedTitleLabelColor = UIColor.blackColor()
+
     /**
 
     Margins between cells are zero, because it is difficult that calculating distance of scrolling. If you change margins between cell's labels, use constentInset.

@@ -15,17 +15,15 @@ class CustomMenuCell: MenuCell {
         super.init(frame: frame)
 
         contentInset = UIEdgeInsets(top: 0, left: 40, bottom: 1, right: 40)
+        titleLabelFont = UIFont.systemFontOfSize(18)
+        selectedTitleLabelFont = UIFont.boldSystemFontOfSize(17)
+        selectedTitleLabelColor = UIColor.blueColor()
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
 
-    override func updateData() {
-        super.updateData()
-
-        titleLabel.textColor = selected ? UIColor.blackColor() : UIColor.grayColor()
-    }
 }
 
 class CustomViewController: PageController {
@@ -35,6 +33,7 @@ class CustomViewController: PageController {
 
         menuBar.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.9)
         menuBar.registerClass(CustomMenuCell.self)
+        underLine.backgroundColor = UIColor.blueColor()
         delegate = self
         viewControllers = createViewControllers()
     }

@@ -138,9 +138,27 @@ extension MenuBar.ContainerView {
         let duration = animated ? bar!.durationForAnimation : 0
         UIView.animateWithDuration(duration, animations: {
             self.contentOffset = offset
+            self.selectedMenu()
             }, completion: { _ in
                 self.updateSubviews()
         })
+    }
+
+    func selectedMenu() {
+        if let view = viewForCurrentPage() as? MenuCell {
+            view.titleLabel.font = view.selectedTitleLabelFont
+            view.titleLabel.textColor = view.selectedTitleLabelColor
+            bar?.contentDidChangeStartChangeUnderLineWidth(view.titleLabel.text!)
+            for subview in subviews {
+                if let subview = subview as? MenuCell {
+                    if subview != view {
+                        subview.titleLabel.font = subview.titleLabelFont
+                        subview.titleLabel.textColor = subview.titleLabelColor
+                    }
+                }
+            }
+
+        }
     }
 
     func updateSubviews() {

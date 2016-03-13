@@ -17,12 +17,15 @@ public class PageController: UIViewController {
     public weak var delegate: PageControllerDelegate?
 
     public var menuBar: MenuBar = MenuBar(frame: CGRectZero)
+    public var underLine = UIView(frame: CGRectZero)
     public var visibleViewController: UIViewController!
     public var viewControllers: [UIViewController] = [] {
         didSet {
             _reloadData()
         }
     }
+    public var durationForAnimation: NSTimeInterval = 0.2
+    private var didFinishFirstLoad = false
 
     public override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,6 +46,13 @@ extension PageController {
         }
 
         return frame
+    }
+
+    public var frameForUnderLine: CGRect {
+        let width: CGFloat  = CGRectGetWidth(menuBar.frame) / 3
+        let height: CGFloat = CGRectGetHeight(menuBar.frame) * 0.1
+
+        return CGRect(x: CGRectGetWidth(menuBar.frame) / 2 - width / 2, y: CGRectGetHeight(menuBar.frame) - height, width: width, height: height)
     }
 
     public var frameForContentController: CGRect {
@@ -80,6 +90,10 @@ extension PageController {
         menuBar.frame = frameForMenuBar
         menuBar.controller = self
         view.addSubview(menuBar)
+
+        underLine.frame = frameForUnderLine
+        menuBar.addSubview(underLine)
+
     }
 
     func _reloadData() {
@@ -155,8 +169,25 @@ extension PageController {
         if visibleViewController != viewController {
             let _visibleViewController = visibleViewController
             visibleViewController = viewController
+            if !didFinishFirstLoad {
+                didFinishFirstLoad = true
+                changeUnderLineWidth(visibleViewController.title!)
+            }
             delegate?.pageController(self, didChangeVisibleController: viewController, fromViewController: _visibleViewController)
         }
+    }
+
+    func changeUnderLineWidth(title: String) {
+        let label  = UILabel(frame: CGRectMake(0, 0, CGRectGetWidth(menuBar.frame) / 3, CGRectGetHeight(underLine.frame)))
+        label.text = title
+        label.sizeToFit()
+
+        let width = CGRectGetWidth(label.frame)
+        let height = CGRectGetHeight(underLine.frame)
+        UIView.animateWithDuration(durationForAnimation, animations: {
+            self.underLine.frame = CGRect(x: CGRectGetWidth(self.menuBar.frame) / 2 - width / 2, y: self.underLine.frame.origin.y, width: width, height: height)
+            }, completion: { _ in
+        })
     }
 }
 

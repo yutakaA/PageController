@@ -92,6 +92,8 @@ public extension MenuBar {
         let cell = menuCellClass.init(frame: frame)
         cell.titleLabel.text = items[index]
         cell.index = index
+        cell.titleLabel.font = cell.titleLabelFont
+        cell.titleLabel.textColor = cell.titleLabelColor
         cell.updateData()
         cell.updateConstraints()
 
@@ -144,6 +146,7 @@ public extension MenuBar {
             let contentOffset = CGPoint(x: x, y: 0)
             UIView.animateWithDuration(durationForAnimation, animations: {
                 self.scrollView.contentOffset = contentOffset
+                self.scrollView.selectedMenu()
                 }, completion: { _ in
                     self.completion()
             })
@@ -168,6 +171,7 @@ public extension MenuBar {
             let contentOffset = CGPoint(x: x, y: 0)
             UIView.animateWithDuration(durationForAnimation, animations: {
                 self.scrollView.contentOffset = contentOffset
+                self.scrollView.selectedMenu()
                 }, completion: { _ in
                     self.completion()
             })
@@ -181,6 +185,11 @@ public extension MenuBar {
 
     func contentDidChangePage(AtIndex index: Int) {
         controller?.switchPage(AtIndex: index)
+
+    }
+
+    func contentDidChangeStartChangeUnderLineWidth(selectTitle: String) {
+        controller?.changeUnderLineWidth(selectTitle)
     }
 
 }
