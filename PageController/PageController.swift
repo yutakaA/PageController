@@ -180,7 +180,13 @@ extension PageController {
     func changeUnderLineWidth(title: String) {
         let label  = UILabel(frame: CGRectMake(0, 0, CGRectGetWidth(menuBar.frame) / 3, CGRectGetHeight(underLine.frame)))
         label.text = title
-        label.sizeToFit()
+        let maxHeight : CGFloat = 10000
+        let rect = label.attributedText?.boundingRectWithSize(CGSizeMake(CGRectGetWidth(menuBar.frame) / 3, maxHeight),
+            options: .UsesLineFragmentOrigin, context: nil)
+        var frame = label.frame
+        frame.size.height = rect!.size.height
+        frame.size.width = rect!.size.width - CGFloat(Double(title.characters.count))
+        label.frame = frame
 
         let width = CGRectGetWidth(label.frame)
         let height = CGRectGetHeight(underLine.frame)
