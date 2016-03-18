@@ -17,6 +17,7 @@ public class PageController: UIViewController {
     public weak var delegate: PageControllerDelegate?
 
     public var menuBar: MenuBar = MenuBar(frame: CGRectZero)
+    public var menuBarHeight: CGFloat = 44
     public var underLine = UIView(frame: CGRectZero)
     public var visibleViewController: UIViewController!
     public var viewControllers: [UIViewController] = [] {
@@ -40,7 +41,7 @@ public class PageController: UIViewController {
 extension PageController {
 
     public var frameForMenuBar: CGRect {
-        var frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: 44)
+        var frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: menuBarHeight)
         if let frameForNavigationBar = navigationController?.navigationBar.frame {
             frame.origin.y = frameForNavigationBar.maxY
         }
