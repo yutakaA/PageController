@@ -15,9 +15,9 @@ class CustomMenuCell: MenuCell {
         super.init(frame: frame)
 
         contentInset = UIEdgeInsets(top: 0, left: 40, bottom: 1, right: 40)
-        titleLabelFont = UIFont.systemFontOfSize(14)
-        selectedTitleLabelFont = UIFont.boldSystemFontOfSize(13)
-        selectedTitleLabelColor = UIColor.blueColor()
+        titleLabelFont = UIFont.systemFont(ofSize: 14)
+        selectedTitleLabelFont = UIFont.boldSystemFont(ofSize: 13)
+        selectedTitleLabelColor = UIColor.blue
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -39,9 +39,9 @@ class CustomViewController: PageController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        menuBar.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.9)
+        menuBar.backgroundColor = UIColor.white.withAlphaComponent(0.9)
         menuBar.registerClass(CustomMenuCell.self)
-        underLine.backgroundColor = UIColor.blueColor()
+        underLine.backgroundColor = UIColor.blue
         delegate = self
         viewControllers = createViewControllers()
     }
@@ -76,8 +76,8 @@ extension CustomViewController {
 
 extension CustomViewController: PageControllerDelegate {
 
-    func pageController(pageController: PageController, didChangeVisibleController visibleViewController: UIViewController, fromViewController: UIViewController?) {
-        print("now title is \(pageController.visibleViewController.title)")
+    func pageController(_ pageController: PageController, didChangeVisibleController visibleViewController: UIViewController, fromViewController: UIViewController?) {
+        print("now title is \(pageController.visibleViewController?.title)")
         print("did change from \(fromViewController?.title) to \(visibleViewController.title)")
         if pageController.visibleViewController == visibleViewController {
             print("visibleViewController is assigned pageController.visibleViewController")

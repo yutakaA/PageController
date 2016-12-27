@@ -1,6 +1,8 @@
 NAME = "PageController"
 WORKSPACE = "#{NAME}.xcworkspace"
 
+DESTINATION = "platform=iOS Simulator,OS=10.2,name=iPhone 7"
+
 task :test do
-  sh "xcodebuild clean -workspace #{WORKSPACE} -scheme #{NAME} -sdk iphonesimulator9.2 -destination 'platform=iOS Simulator,name=iPhone 6,OS=9.2' build test | xcpretty -c"
+  sh "xcodebuild test -workspace #{WORKSPACE} -scheme #{NAME} -destination \"#{DESTINATION}\" -configuration Release ONLY_ACTIVE_ARCH=NO ENABLE_TESTABILITY=YES | xcpretty"
 end
