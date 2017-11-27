@@ -77,8 +77,8 @@ extension CustomViewController {
 extension CustomViewController: PageControllerDelegate {
 
     func pageController(_ pageController: PageController, didChangeVisibleController visibleViewController: UIViewController, fromViewController: UIViewController?) {
-        print("now title is \(pageController.visibleViewController?.title)")
-        print("did change from \(fromViewController?.title) to \(visibleViewController.title)")
+        print("now title is \(String(describing: pageController.visibleViewController?.title))")
+        print("did change from \(String(describing: fromViewController?.title)) to \(String(describing: visibleViewController.title))")
         if pageController.visibleViewController == visibleViewController {
             print("visibleViewController is assigned pageController.visibleViewController")
         }

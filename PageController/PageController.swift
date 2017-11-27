@@ -192,7 +192,7 @@ extension PageController {
                                                               options: .usesLineFragmentOrigin, context: nil)
         var frame = label.frame
         frame.size.height = rect!.size.height
-        frame.size.width = rect!.size.width - CGFloat(Double(title.characters.count))
+        frame.size.width = rect!.size.width - CGFloat(Double(title.count))
         label.frame = frame
 
         let width = label.frame.width
