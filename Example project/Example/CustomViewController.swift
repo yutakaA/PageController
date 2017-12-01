@@ -14,7 +14,8 @@ class CustomMenuCell: MenuCell {
     required init(frame: CGRect) {
         super.init(frame: frame)
 
-        contentInset = UIEdgeInsets(top: 0, left: 40, bottom: 1, right: 40)
+        // NOTE: ここでメニュータブの上下左右マージンを調整する
+        contentInset = UIEdgeInsets(top: 10, left: 40, bottom: 10, right: 40)
         titleLabelFont = UIFont.systemFont(ofSize: 14)
         selectedTitleLabelFont = UIFont.boldSystemFont(ofSize: 13)
         selectedTitleLabelColor = UIColor.blue
