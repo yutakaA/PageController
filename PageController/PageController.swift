@@ -111,7 +111,7 @@ extension PageController {
     }
 
     public func reloadPages(AtIndex index: Int) {
-        for viewController in childViewControllers {
+        for viewController in children {
             if viewController != viewControllers[index] {
                 hideViewController(viewController)
             }
@@ -151,7 +151,7 @@ extension PageController {
         switchVisibleViewController(visibleViewController)
         // offsetX < 0 or offsetX > contentSize.width
         let frameOfContentSize = CGRect(x: 0, y: 0, width: scrollView.contentSize.width, height: scrollView.contentSize.height)
-        for viewController in childViewControllers {
+        for viewController in children {
             if viewController != visibleViewController && !viewController.view.include(frameOfContentSize) {
                 hideViewController(viewController)
             }
@@ -161,13 +161,13 @@ extension PageController {
         displayViewController(visibleViewController, frame: frameForCenterContentController)
 
         // left
-        var exists = childViewControllers.filter { $0.view.include(frameForLeftContentController) }
+        var exists = children.filter { $0.view.include(frameForLeftContentController) }
         if exists.isEmpty {
             displayViewController(viewControllers[(index - 1).relative(viewControllers.count)], frame: frameForLeftContentController)
         }
 
         // right
-        exists = childViewControllers.filter { $0.view.include(frameForRightContentController) }
+        exists = children.filter { $0.view.include(frameForRightContentController) }
         if exists.isEmpty {
             displayViewController(viewControllers[(index + 1).relative(viewControllers.count)], frame: frameForRightContentController)
         }
@@ -258,16 +258,16 @@ extension PageController {
     }
 
     func displayViewController(_ viewController: UIViewController, frame: CGRect) {
-        addChildViewController(viewController)
+        addChild(viewController)
         viewController.view.frame = frame
         scrollView.addSubview(viewController.view)
-        viewController.didMove(toParentViewController: self)
+        viewController.didMove(toParent: self)
     }
 
     func hideViewController(_ viewController: UIViewController) {
-        viewController.willMove(toParentViewController: self)
+        viewController.willMove(toParent: self)
         viewController.view.removeFromSuperview()
-        viewController.removeFromParentViewController()
+        viewController.removeFromParent()
     }
 
 }

@@ -10,7 +10,7 @@ import UIKit
 
 open class MenuCell: UIView {
 
-    open let titleLabel = UILabel(frame: CGRect.zero)
+    open var titleLabel = UILabel(frame: CGRect.zero)
     open var titleLabelFont = UIFont.systemFont(ofSize: 17)
     open var selectedTitleLabelFont = UIFont.boldSystemFont(ofSize: 17)
     open var titleLabelColor = UIColor.gray
@@ -100,9 +100,9 @@ extension MenuCell {
         let views = ["view": titleLabel]
         switch direction {
         case .horizontal:
-            return NSLayoutConstraint.constraints(withVisualFormat: constraintFormat(.horizontal), options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: views)
+            return NSLayoutConstraint.constraints(withVisualFormat: constraintFormat(.horizontal), options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: views)
         case .vertical:
-            return NSLayoutConstraint.constraints(withVisualFormat: constraintFormat(.vertical), options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: views)
+            return NSLayoutConstraint.constraints(withVisualFormat: constraintFormat(.vertical), options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: views)
         }
     }
 

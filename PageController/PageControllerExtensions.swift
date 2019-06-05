@@ -173,7 +173,7 @@ public extension Int {
 public extension UIViewController {
 
     func childViewControllerOrderedByX(_ asc: Bool) -> [UIViewController] {
-        return childViewControllers.sorted {
+        return children.sorted {
             if asc {
                 return $0.view.frame.origin.x < $1.view.frame.origin.x
             }
@@ -187,7 +187,7 @@ public extension UIScrollView {
     func needsRecenter() -> Bool {
 
         let centerOffsetX = (contentSize.width - frame.width) / 2
-        let distanceFromCenter = fabs(contentOffset.x - centerOffsetX)
+        let distanceFromCenter = abs(contentOffset.x - centerOffsetX)
 
         return distanceFromCenter >= bounds.width
     }
