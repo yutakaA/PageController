@@ -306,8 +306,10 @@ class ExtensionTests: XCTestCase {
 
         result = scrollView.viewForCurrentPage()
         valid = nil
-        XCTAssertTrue(result == valid, "result:\(result?.frame), valid:\(valid?.frame) is failed")
-
+        if let _result = result,
+            let _valid = valid {
+            XCTAssertTrue(result == valid, "result:\(_result.frame), valid:\(_valid.frame) is failed")
+        }
 
         scrollView.contentSize = CGSize(width: 300, height: 44)
         views = [
@@ -320,7 +322,10 @@ class ExtensionTests: XCTestCase {
         refreshViewNearByCenter(scrollView, views: views)
         result = scrollView.viewForCurrentPage()
         valid = views[0]
-        XCTAssertTrue(result == valid, "result:\(result?.frame), valid:\(valid?.frame) is failed")
+        if let _result = result,
+            let _valid = valid {
+            XCTAssertTrue(result == valid, "result:\(_result.frame), valid:\(_valid.frame) is failed")
+        }
 
 
         scrollView.contentSize = CGSize(width: 300, height: 44)
@@ -337,17 +342,26 @@ class ExtensionTests: XCTestCase {
         scrollView.contentOffset = CGPoint(x: 40, y: 0)
         result = scrollView.viewForCurrentPage()
         valid = views[1]
-        XCTAssertTrue(result == valid, "result:\(result?.frame), valid:\(valid?.frame) is failed")
+        if let _result = result,
+            let _valid = valid {
+            XCTAssertTrue(result == valid, "result:\(_result.frame), valid:\(_valid.frame) is failed")
+        }
 
         scrollView.contentOffset = CGPoint(x: 50, y: 0)
         result = scrollView.viewForCurrentPage()
         valid = views[2]
-        XCTAssertTrue(result == valid, "result:\(result?.frame), valid:\(valid?.frame) is failed")
+        if let _result = result,
+            let _valid = valid {
+            XCTAssertTrue(result == valid, "result:\(_result.frame), valid:\(_valid.frame) is failed")
+        }
 
         scrollView.contentOffset = CGPoint(x: 60, y: 0)
         result = scrollView.viewForCurrentPage()
         valid = views[2]
-        XCTAssertTrue(result == valid, "result:\(result?.frame), valid:\(valid?.frame) is failed")
+        if let _result = result,
+            let _valid = valid {
+            XCTAssertTrue(result == valid, "result:\(_result.frame), valid:\(_valid.frame) is failed")
+        }
     }
 }
 

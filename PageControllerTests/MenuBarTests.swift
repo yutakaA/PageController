@@ -30,7 +30,7 @@ class MenuBarTests: XCTestCase {
         menuBar.items = ["1", "2", "3"]
         menuBar.reloadData(atIndex: 0)
 
-        view = menuBar.scrollView.viewForCurrentPage() as! MenuCell
+        view = menuBar.scrollView.viewForCurrentPage() as? MenuCell
         XCTAssertEqual(view.index, 0, "is failed")
 
     }
